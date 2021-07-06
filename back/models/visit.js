@@ -20,7 +20,7 @@ visitSchema.set('toJSON', {
   }
 })
 
-const Link = mongoose.model('Link', visitSchema)
+const Visit = mongoose.model('Visit', visitSchema)
 
 
-module.exports = Link
+module.exports = Visit
