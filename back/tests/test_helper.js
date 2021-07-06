@@ -25,6 +25,15 @@ const initialUsers = [
   },
 ]
 
+const initialUser = initialUsers.pop()
+
+const initialLinks = [
+  'https://google.com',
+  'youtube.com',
+  'stackoverflow.com',
+  'www.zelda.com'
+]
+
 const usersInDB = async () => {
   const users = await User.find({})
   return users.map(u => u.toJSON())
@@ -42,6 +51,8 @@ const visitsInDB = async () => {
 
 module.exports = {
   initialUsers,
+  initialUser,
+  initialLinks,
   usersInDB,
   linksInDB,
   visitsInDB

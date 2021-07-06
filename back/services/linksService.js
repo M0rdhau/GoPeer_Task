@@ -29,8 +29,8 @@ const getLinkByID = async (request, response) => {
     })
     const savedVisit = await visit.save()
     link.visits = link.visits.concat(savedVisit.id)
-    await link.update()
-    response.redirect(link)
+    await link.updateOne()
+    response.redirect(link.destURL)
   } else {
     response.status(404).end()
   }
@@ -44,9 +44,12 @@ const createLink = async (request) => {
   }
   const user = await User.findById(decodedToken.userId)
 
+  const destURL = (body.destURL.startsWith('https://') || body.destURL.startsWith('http://'))
+    ? body.destURL
+    : `http://${body.destURL}`
 
   const link = new Link({
-    destURL: body.destURL,
+    destURL,
     user: user.id,
   })
 

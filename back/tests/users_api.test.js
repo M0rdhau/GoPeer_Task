@@ -4,13 +4,15 @@ const app = require('../app')
 const api = supertest(app)
 const User = require('../models/user')
 const helper = require('./test_helper')
-const userService = require('../services/usersService')
+const bcrypt = require('bcrypt')
 
 beforeEach(async () => {
   await User.deleteMany({})
-  const initialUsers = helper.initialUsers.map(u => ({ body : u }))
+  const initialUsers = helper.initialUsers
   for(let user of initialUsers){
-    await userService.addUser(user)
+    const passwordHash = await bcrypt.hash(user.password, 1)
+    const newUser = new User({ username: user.username, passwordHash })
+    await newUser.save()
   }
 })
 
