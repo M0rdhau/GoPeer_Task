@@ -81,6 +81,31 @@ describe('adding a user to the database', () => {
   })
 })
 
+describe('Logging in', () => {
+  test('with an existing user is successful', async () => {
+    const randomUser = helper.initialUsers[
+      Math.floor(Math.random() * helper.initialUsers.length)
+    ]
+    const response = await api
+      .post('/api/login')
+      .send(randomUser)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    expect(response.body.username).toEqual(randomUser.username)
+  })
+  test('with an existing username but wrong password is unsuccessful', async () => {
+    const randomUser = helper.initialUsers[
+      Math.floor(Math.random() * helper.initialUsers.length)
+    ]
+    await api
+      .post('/api/login')
+      .send({ username: randomUser.username, password: 'bla' })
+      .expect(400)
+      .expect('error', 'invalid username or password')
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
