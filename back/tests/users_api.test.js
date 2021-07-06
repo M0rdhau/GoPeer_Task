@@ -38,7 +38,7 @@ describe('adding a user to the database', () => {
     await api
       .post('/api/users')
       .send(newUser)
-      .expect(200)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const usersFinally = await helper.usersInDB()
@@ -55,7 +55,7 @@ describe('adding a user to the database', () => {
     await api
       .post('/api/users')
       .send(newUser)
-      .expect(200)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const anotherNewUser = {

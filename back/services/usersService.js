@@ -25,7 +25,7 @@ const addUser = async (request) => {
 
   try{
     const savedUser = await user.save()
-    return savedUser
+    return { code: 201, data: savedUser }
   }catch (e){
     return { error: true, code: 406, message: 'Username must be unique' }
   }

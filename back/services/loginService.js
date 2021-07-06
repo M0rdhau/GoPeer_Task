@@ -21,7 +21,7 @@ const login = async (request) => {
 
   const token = jwt.sign(userForToken, process.env.SECRET)
 
-  return { token, username: userForToken.username }
+  return { code: 200, data: { token, username: userForToken.username } }
 }
 
 module.exports = {
