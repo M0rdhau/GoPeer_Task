@@ -29,9 +29,9 @@ const initialUser = initialUsers.pop()
 
 const initialLinks = [
   'https://google.com',
-  'youtube.com',
-  'stackoverflow.com',
-  'www.zelda.com'
+  'https://youtube.com',
+  'https://stackoverflow.com',
+  'https://www.zelda.com'
 ]
 
 const usersInDB = async () => {

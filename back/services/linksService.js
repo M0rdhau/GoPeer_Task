@@ -53,10 +53,12 @@ const createLink = async (request) => {
     user: user.id,
   })
 
+
   const savedLink = await link.save()
   user.links = user.links.concat(savedLink.id)
   await user.save()
   return { code: 201, data: savedLink }
+
 }
 
 const deleteLink = async (request) => {

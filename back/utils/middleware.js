@@ -16,6 +16,7 @@ const unknownEndpoint = (request, response) => {
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
+  logger.error(error.name)
   logger.error('---')
 
   if (error.name === 'CastError') {
@@ -24,6 +25,8 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).append('error', error.message).send()
   }else if(error.name === 'TypeError'){
     return response.status(404).append('error', 'Not found').send()
+  }else if(error.name === 'JsonWebTokenError'){
+    return response.status(401).append('error', error.message).send()
   }else{
     return response.status(400).append('error', 'bad request').send()
   }

@@ -23,7 +23,7 @@ content-type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWV0aGluZzIiLCJ1c2VySWQiOiI2MGU0NzVkOGEzZjkyZjU4ZjhiNjk5NDAiLCJpYXQiOjE2MjU2MDc2Mzl9.lzRJz4kmqp8u8ep0RgHEgE_g_RFTycnx5RG0G2jOoI4
 
 {
-    "destURL": "https://instagram.com"
+    "destURL": "https://somesite.com"
 }
 
 ###
@@ -43,3 +43,8 @@ GET http://localhost:3001/links/60e4cefc
 ###
 
 GET http://localhost:3001/shmlinks
+
+###
+
+DELETE http://localhost:3001/links/60e4cefc83b48c281dd826c4
+# Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWV0aGluZzIiLCJ1c2VySWQiOiI2MGU0NzVkOGEzZjkyZjU4ZjhiNjk5NDAiLCJpYXQiOjE2MjU2MDc2Mzl9.lzRJz4kmqp8u8ep0RgHEgE_g_RFTycnx5RG0G2jOoI4
