@@ -15,7 +15,7 @@ const getLinksByUserToken = async (token) => {
 
   const links = await Link
     .find({ user: user.id })
-    .populate('user', { username: 1, name: 1 })
+    .populate('visits')
 
   return { code: 200, data: links }
 }
@@ -29,7 +29,7 @@ const getLinkByID = async (request, response) => {
     })
     const savedVisit = await visit.save()
     link.visits = link.visits.concat(savedVisit.id)
-    await link.updateOne()
+    await link.save()
     response.redirect(link.destURL)
   } else {
     response.status(404).end()

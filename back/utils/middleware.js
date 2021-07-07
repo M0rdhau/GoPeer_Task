@@ -16,6 +16,7 @@ const unknownEndpoint = (request, response) => {
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
+  logger.error('---')
 
   if (error.name === 'CastError') {
     return response.status(400).append('error', 'malformatted id').send()
