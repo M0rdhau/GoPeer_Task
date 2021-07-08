@@ -9,7 +9,7 @@ This project also requires [docker](https://docs.docker.com/engine/install/ubunt
 
 ## Setting up the project
 
-First, to install all the dependencies, run:
+First, to install all the dependencies, in the `./back` directory, run:
 
 `
 npm install
