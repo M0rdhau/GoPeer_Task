@@ -33,6 +33,18 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvb
 
 ###
 
+GET http://localhost:3001/links/stats/60e57b390ae53247d1b43926
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWV0aGluZzIiLCJ1c2VySWQiOiI2MGU0NzVkOGEzZjkyZjU4ZjhiNjk5NDAiLCJpYXQiOjE2MjU2MDc2Mzl9.lzRJz4kmqp8u8ep0RgHEgE_g_RFTycnx5RG0G2jOoI4
+
+{
+    "from": "2021-06-06T00:19:02.806Z",
+    "to": "2021-07-07T23:19:02.806Z",
+    "type": "year"
+}
+
+###
+
 GET http://localhost:3001/links/60e58157e0738f51d73334d1
 
 

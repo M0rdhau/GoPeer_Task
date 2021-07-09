@@ -11,6 +11,11 @@ linksRouter.get('/:id', async (request, response) => {
   await linksService.getLinkByID(request, response)
 })
 
+linksRouter.get('/stats/:id', async (request, response) => {
+  const stats = await linksService.getLinkStatsByID(request)
+  routerHelperService.handleResponse(stats, response)
+})
+
 linksRouter.post('/', async (request, response) => {
   const linkCreated = await linksService.createLink(request)
   routerHelperService.handleResponse(linkCreated, response)
