@@ -23,6 +23,7 @@ const Login = (props) => {
   }
 
   if(user !== null){
+    console.log(user)
     return(
       <div>
         <p>Hello, {user.username}</p>
@@ -38,8 +39,8 @@ const Login = (props) => {
           type='password'
           value={values.password}
           onChange={handleChange} />
-        <button onClick={handleLogin} >Log In</button>
-        <button onClick={props.toggle}> Or Register </button>
+        <button onClick={handleLogin}>Log In</button>
+        <button onClick={props.toggle}>Or Register</button>
       </div>
     )
   }

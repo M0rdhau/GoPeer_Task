@@ -39,7 +39,7 @@ const Register = (props) => {
         value={values.confirmPassword}
         onChange={onConfirmPasswordChange} />
       <button onClick={handleRegister}>Register</button>
-      <button onClick={props.toggle}> Or Log In </button>
+      <button onClick={props.toggle}>Or Log In</button>
     </div>
   )
 
