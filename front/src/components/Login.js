@@ -3,7 +3,7 @@ import { useForm } from '../hooks/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, logOut } from '../reducers/userReducer'
 
-const Login = () => {
+const Login = (props) => {
   const [values, handleChange, reset] = useForm({ username: '', password: '' })
   const dispatch = useDispatch()
 
@@ -39,6 +39,7 @@ const Login = () => {
           value={values.password}
           onChange={handleChange} />
         <button onClick={handleLogin} >Log In</button>
+        <button onClick={props.toggle}> Or Register </button>
       </div>
     )
   }

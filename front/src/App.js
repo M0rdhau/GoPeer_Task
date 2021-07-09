@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { initUser } from './reducers/userReducer'
-import Login from './components/Login'
-import Register from './components/Register'
+import { LoginScreen } from './components/LoginScreen'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -13,8 +12,7 @@ const App = () => {
 
   return (
     <div className="mainBody">
-      <Login/>
-      <Register/>
+      <LoginScreen/>
     </div>
   )
 
