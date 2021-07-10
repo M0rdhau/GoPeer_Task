@@ -7,6 +7,18 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
+const popualteDB = async () => {
+  const config = {
+    headers: { Authorization: token }
+  }
+  try{
+    const response = await axios.get(`${baseUrl}/populate`, config)
+    return response
+  }catch(e){
+    console.log(e)
+  }
+}
+
 const addUrl = async (destURL) => {
   const config = {
     headers: { Authorization: token }
@@ -31,10 +43,13 @@ const deleteUrl = async (id) => {
   return response
 }
 
-const getSingleUrl = async (id) => {
-  const config = { headers: { Authorization: token } }
-  const response = await axios.get(`${baseUrl}/stats/${id}`, config)
+const getSingleUrl = async (id, timeData) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+  const reqUrl = `${baseUrl}/stats/${id}/${timeData.from}/${timeData.to}/${timeData.type}`
+  const response = await axios.get(reqUrl, config)
   return response
 }
 
-export default { setToken, addUrl, getAllUrls, getSingleUrl, deleteUrl }
+export default { setToken, addUrl, getAllUrls, getSingleUrl, deleteUrl, popualteDB }

@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useForm } from '../hooks/useForm'
+import { setNotification } from '../reducers/notificationReducer'
 import registerService from '../services/register'
 
 const Register = (props) => {
   const [values, handleChange, reset] = useForm({ username: '', password: '', confirmPassword: '' })
   const [areEqual, setAreEqual] = useState(true)
 
+  const dispatch = useDispatch()
+
   const handleRegister = async () => {
     if(areEqual){
       try{
-        console.log(values.username, values.password)
-        const registerSuccess = await registerService.register(values.username, values.password)
-        console.log(registerSuccess)
+        await registerService.register(values.username, values.password)
+        dispatch(setNotification('Registration success!', false))
         reset()
       }catch (e){
         console.log(e.response.headers.error)

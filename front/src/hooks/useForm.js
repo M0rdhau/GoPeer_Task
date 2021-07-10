@@ -11,6 +11,7 @@ export const useForm = initVals => {
   }
 
   const reset = () => {
+    console.log(values)
     setValues(
       Object.fromEntries(Object.keys(values).map((key) => [key, '']))
     )

@@ -10,8 +10,20 @@ const linkDataReducer = (state = [], action) => {
       return [...state, action.data]
     case 'DELETE_LINK':
       return state.filter(link => action.id !== link.id)
+    case 'POPULATE':
+      return action.data
     default:
       return state
+  }
+}
+
+export const populateLinks = () => {
+  return async dispatch => {
+    const response = await linkService.popualteDB()
+    dispatch({
+      type: 'POPULATE',
+      data: response.data
+    })
   }
 }
 

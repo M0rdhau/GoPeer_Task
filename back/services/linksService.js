@@ -5,6 +5,11 @@ const jwt = require('jsonwebtoken')
 
 const TOKEN_ERROR = { error: true, code: 401, message: 'token missing or invalid' }
 
+//dummy data variables
+const POPULATE_VISITS_NUM = 100
+const MILLIS_IN_A_DAY = 86400000
+const MAX_OFFSET = 400
+
 const getLinksByUserToken = async (token) => {
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if(!token || !decodedToken.userId){
@@ -24,8 +29,43 @@ const getLinksByUserToken = async (token) => {
   return { code: 200, data: links }
 }
 
+const populate = async (request) => {
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if(!request.token || !decodedToken.userId){
+    return TOKEN_ERROR
+  }
+  const sites = ['https://www.npmjs.com', 'https://fullstackopen.com', 'https://github.com/']
+  await Link.deleteMany({ user: decodedToken.userId })
+
+  const urls = await Link.find({ user: decodedToken.userId })
+  console.log('links after deletion', urls)
+
+  const user = await User.findById(decodedToken.userId)
+  const savedUrls = []
+  for(let url in sites){
+    const link = new Link({ destURL: sites[url], user: user.id })
+    const savedUrl = await link.save()
+    savedUrls.push(savedUrl)
+  }
+  const savedUrlIds = savedUrls.map(url => url._id)
+  console.log(savedUrlIds)
+
+  for(let i = 0; i < POPULATE_VISITS_NUM; i++){
+    const offset = Math.floor(Math.random()*MAX_OFFSET)*MILLIS_IN_A_DAY
+    const offsetDate = Date.now() - offset
+    const randLinkIdx = Math.floor(Math.random()*savedUrlIds.length)
+    const newVisit = new Visit({ date: offsetDate })
+    const savedVisit = await newVisit.save()
+    const randLink = await Link.findById(savedUrlIds[randLinkIdx])
+    randLink.visits = randLink.visits.concat(savedVisit.id)
+    await randLink.save()
+  }
+
+  return await getLinksByUserToken(request.token)
+}
+
 const getLinkStatsByID = async (request) => {
-  const body = request.body
+  const body = request.params
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
   if(!request.token || !decodedToken.userId){
     return TOKEN_ERROR
@@ -75,9 +115,7 @@ const getLinkByID = async (request, response) => {
   const link = await Link.findById(request.params.id)
 
   if(link){
-    const visit = new Visit({
-      link: request.params.id
-    })
+    const visit = new Visit({})
     const savedVisit = await visit.save()
     link.visits = link.visits.concat(savedVisit.id)
     await link.save()
@@ -135,5 +173,6 @@ module.exports = {
   getLinksByUserToken,
   getLinkByID,
   createLink,
-  deleteLink
+  deleteLink,
+  populate
 }
