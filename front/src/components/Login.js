@@ -23,7 +23,6 @@ const Login = (props) => {
   }
 
   if(user !== null){
-    console.log(user)
     return(
       <div>
         <p>Hello, {user.username}</p>
