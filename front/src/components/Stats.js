@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { VictoryPie } from 'victory'
-import linkService from '../services/linkService'
+import { getGeneral } from '../reducers/linkDataReducer'
 
 export const Stats = () => {
-  const [linkData, setLinkData] = useState()
   const [focusedLink, setFocusedLink] = useState('')
   const [mouseCoordinates, setMouseCoordinates] = useState({ x: 0, y: 0 })
   const [focusedTimeoutID, setFocusedTimeoutID] = useState()
-  const user = useSelector(state => state.user)
 
+  const linkData = useSelector(state => state.linkData)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await linkService.getAllUrls(user)
-      setLinkData(response.data)
-    }
-    getData()
-  }, [user])
+    dispatch(getGeneral())
+  }, [dispatch])
 
   const cursorTextStyle = (focusedLink === '')
     ? { display: 'none' }

@@ -105,9 +105,15 @@ const createLink = async (request) => {
   })
 
 
-  const savedLink = await link.save()
+  let savedLink = await link.save()
   user.links = user.links.concat(savedLink.id)
   await user.save()
+  savedLink = savedLink.toJSON()
+  savedLink = {
+    destURL: savedLink.destURL,
+    id: savedLink.id,
+    visits: savedLink.visits.length
+  }
   return { code: 201, data: savedLink }
 
 }

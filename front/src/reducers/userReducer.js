@@ -1,3 +1,4 @@
+import linkService from '../services/linkService'
 import loginService from '../services/login'
 
 const USER_NAME = 'SHORTENER_USERNAME'
@@ -18,6 +19,7 @@ export const loginUser = (username, password) => {
   return async dispatch => {
     try{
       const data = await loginService.login(username, password)
+      linkService.setToken(data.token)
       window.localStorage.setItem(USER_NAME, data.username)
       window.localStorage.setItem(USER_TOKEN, data.token)
       dispatch({
@@ -34,6 +36,7 @@ export const initUser = () => {
   const username = window.localStorage.getItem(USER_NAME)
   const token = window.localStorage.getItem(USER_TOKEN)
   if(username !== null && token !== null){
+    linkService.setToken(token)
     return{
       type: 'LOGIN',
       data: { username, token }
