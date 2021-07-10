@@ -1,17 +1,20 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGeneral, populateLinks } from '../reducers/linkDataReducer'
+import { setNotification } from '../reducers/notificationReducer'
 import { Createlink } from './CreateLink'
-import Notification from './Notification'
 import { Stats } from './Stats'
 
 export const Main = () => {
   const data = useSelector(state => state.linkData)
   const dispatch = useDispatch()
 
-  const populateDB = () => {
-    dispatch(populateLinks())
+  const populateDB = async () => {
+    try{
+      await dispatch(populateLinks())
+    }catch (e){
+      dispatch(setNotification('Unable to populate with dummy data', true))
+    }
   }
 
   useEffect(() => {
@@ -20,7 +23,6 @@ export const Main = () => {
 
   return (
     <div>
-      <Notification/>
       <Createlink/>
       <button onClick={populateDB}>Populate</button>
       {data.length > 0 && <Stats/>}

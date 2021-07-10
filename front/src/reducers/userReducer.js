@@ -17,18 +17,14 @@ const userReducer = (state = null, action) => {
 
 export const loginUser = (username, password) => {
   return async dispatch => {
-    try{
-      const data = await loginService.login(username, password)
-      linkService.setToken(data.token)
-      window.localStorage.setItem(USER_NAME, data.username)
-      window.localStorage.setItem(USER_TOKEN, data.token)
-      dispatch({
-        type: 'LOGIN',
-        data
-      })
-    }catch (error){
-      console.log('invalid data')
-    }
+    const data = await loginService.login(username, password)
+    linkService.setToken(data.token)
+    window.localStorage.setItem(USER_NAME, data.username)
+    window.localStorage.setItem(USER_TOKEN, data.token)
+    dispatch({
+      type: 'LOGIN',
+      data
+    })
   }
 }
 

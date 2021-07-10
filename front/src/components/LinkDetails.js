@@ -2,6 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { VictoryBar, VictoryChart, VictoryTheme } from 'victory'
 import { useForm } from '../hooks/useForm'
 import linkService from '../services/linkService'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setNotification } from '../reducers/notificationReducer'
 
 export const LinkDetails = ({ linkID }) => {
   const [linkData, setLinkData] = useState([])
@@ -9,15 +12,17 @@ export const LinkDetails = ({ linkID }) => {
 
   const [barValues, setBarValues] = useState(false)
 
+  const dispatch = useDispatch()
+
   const getLinkData = useCallback(async () => {
     try{
       const response = await linkService
         .getSingleUrl(linkID, values)
       setLinkData(response.data)
     }catch(e){
-      console.log(e)
+      dispatch(setNotification('Unable to retrieve details', true))
     }
-  }, [linkID, values])
+  }, [linkID, values, dispatch])
 
   useEffect(() => {
     getLinkData()
@@ -34,6 +39,7 @@ export const LinkDetails = ({ linkID }) => {
 
   return (
     <div>
+      <Link to='/'>Back</Link>
       <div>
         <label htmlFor='from'>From:</label>
         <input name='from' type='date' value={values.from} onChange={setValues}/>

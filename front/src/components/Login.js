@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from '../hooks/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, logOut } from '../reducers/userReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const Login = (props) => {
   const [values, handleChange, reset] = useForm({ username: '', password: '' })
@@ -11,9 +12,9 @@ const Login = (props) => {
 
   const handleLogin = async () => {
     try{
-      dispatch(loginUser(values.username, values.password))
+      await dispatch(loginUser(values.username, values.password))
     }catch (e){
-      console.log(e)
+      dispatch(setNotification(e.response.headers.error))
     }
     reset()
   }

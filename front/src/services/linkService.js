@@ -11,12 +11,8 @@ const popualteDB = async () => {
   const config = {
     headers: { Authorization: token }
   }
-  try{
-    const response = await axios.get(`${baseUrl}/populate`, config)
-    return response
-  }catch(e){
-    console.log(e)
-  }
+  const response = await axios.get(`${baseUrl}/populate`, config)
+  return response
 }
 
 const addUrl = async (destURL) => {

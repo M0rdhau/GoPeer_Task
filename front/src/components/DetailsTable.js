@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const DetailsTable = ({ linkData }) => {
+export const DetailsTable = ({ linkData, removeLink }) => {
+
   return (
     <table>
       <thead>
@@ -19,6 +21,8 @@ export const DetailsTable = ({ linkData }) => {
                <td><a target='_blank' href={`localhost:3001/links/${link.id}`} rel="noreferrer">
                  {`localhost:3001/links/${link.id}`}</a></td>
                <td>{link.visits}</td>
+               <td><Link to={`/details/${link.id}`}>Details</Link></td>
+               <td><button onClick={() => removeLink(link.id)}>Delete</button></td>
              </tr>)
 
         }

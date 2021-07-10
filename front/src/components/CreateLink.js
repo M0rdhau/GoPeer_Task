@@ -3,16 +3,17 @@ import { useForm } from '../hooks/useForm'
 import { useDispatch } from 'react-redux'
 import Togglable from './Togglable'
 import { createLink } from '../reducers/linkDataReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 export const Createlink = () => {
   const [values, handleChange, reset] = useForm({ destURL: '' })
   const dispatch = useDispatch()
 
-  const handleURLAdd = () => {
+  const handleURLAdd = async () => {
     try{
-      dispatch(createLink(values.destURL))
+      await dispatch(createLink(values.destURL))
     }catch(e){
-      console.log(e)
+      dispatch(setNotification('Unable to create a new URL', true))
     }
     reset()
   }

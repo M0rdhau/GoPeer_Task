@@ -29,6 +29,7 @@ const getLinksByUserToken = async (token) => {
   return { code: 200, data: links }
 }
 
+//generating dummy data
 const populate = async (request) => {
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
   if(!request.token || !decodedToken.userId){
@@ -36,10 +37,6 @@ const populate = async (request) => {
   }
   const sites = ['https://www.npmjs.com', 'https://fullstackopen.com', 'https://github.com/']
   await Link.deleteMany({ user: decodedToken.userId })
-
-  const urls = await Link.find({ user: decodedToken.userId })
-  console.log('links after deletion', urls)
-
   const user = await User.findById(decodedToken.userId)
   const savedUrls = []
   for(let url in sites){
@@ -48,7 +45,6 @@ const populate = async (request) => {
     savedUrls.push(savedUrl)
   }
   const savedUrlIds = savedUrls.map(url => url._id)
-  console.log(savedUrlIds)
 
   for(let i = 0; i < POPULATE_VISITS_NUM; i++){
     const offset = Math.floor(Math.random()*MAX_OFFSET)*MILLIS_IN_A_DAY
@@ -161,6 +157,7 @@ const deleteLink = async (request) => {
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
   if(linkToRemove.user.toString() === decodedToken.userId){
+    await Visit.deleteMany({ id: { $in: linkToRemove.visits } })
     await Link.findByIdAndRemove(request.params.id)
     return { code: 204, data: { message: 'Successfully removed a URL', URL: linkToRemove.destURL } }
   }else{

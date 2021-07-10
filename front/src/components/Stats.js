@@ -1,20 +1,37 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { DetailsTable } from './DetailsTable'
 import { LinkDetails } from './LinkDetails'
 import { OverviewData } from './OverviewData'
+import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { deleteLink } from '../reducers/linkDataReducer'
 
 export const Stats = () => {
 
   const linkData = useSelector(state => state.linkData)
 
+  const match = useRouteMatch('/details/:id')
 
+  const linkID = (match && linkData)
+    ? linkData.find(link => link.id === match.params.id).id
+    : null
+
+  const dispatch = useDispatch()
+  const removeLink = (linkID) => {
+    dispatch(deleteLink(linkID))
+  }
 
   return(
     <div style={{ width: '30vw' }}>
-      <DetailsTable linkData={linkData}/>
-      <OverviewData linkData={linkData} />
-      <LinkDetails linkID = {'60e9ce9601ded5b5a802209f'}/>
+      <Switch>
+        <Route path='/details/:id'>
+          <LinkDetails linkID = {linkID} removeLink={removeLink}/>
+        </Route>
+        <Route path='/'>
+          <DetailsTable linkData={linkData}/>
+          <OverviewData linkData={linkData} />
+        </Route>
+      </Switch>
     </div>
   )
 }

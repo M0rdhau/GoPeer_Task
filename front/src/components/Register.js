@@ -16,8 +16,9 @@ const Register = (props) => {
         await registerService.register(values.username, values.password)
         dispatch(setNotification('Registration success!', false))
         reset()
+        props.toggle()
       }catch (e){
-        console.log(e.response.headers.error)
+        dispatch(setNotification(e.response.headers.error))
       }
     }
   }
