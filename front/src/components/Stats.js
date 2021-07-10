@@ -22,7 +22,7 @@ export const Stats = () => {
   }
 
   return(
-    <div style={{ width: '30vw' }}>
+    <div className='stats'>
       <Switch>
         <Route path='/details/:id'>
           <LinkDetails linkID = {linkID} removeLink={removeLink}/>

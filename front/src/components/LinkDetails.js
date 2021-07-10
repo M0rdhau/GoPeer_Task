@@ -38,9 +38,8 @@ export const LinkDetails = ({ linkID }) => {
   }, [linkData])
 
   return (
-    <div>
-      <Link to='/'>Back</Link>
-      <div>
+    <>
+      <div className='sorter'>
         <label htmlFor='from'>From:</label>
         <input name='from' type='date' value={values.from} onChange={setValues}/>
         <label htmlFor='to'>To:</label>
@@ -53,17 +52,19 @@ export const LinkDetails = ({ linkID }) => {
         </select>
         <button onClick={clear}>Reset</button>
         <button onClick={getLinkData}>Search</button>
+        <Link to='/'>Back</Link>
       </div>
       {barValues &&
         <VictoryChart
           theme={VictoryTheme.material}
-          domainPadding={15}>
+          domainPadding={15}
+          width={800}>
           <VictoryBar
             data={barValues.data}
             domain={barValues.domain}
           />
         </VictoryChart>
       }
-    </div>
+    </>
   )
 }

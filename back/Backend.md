@@ -37,3 +37,6 @@ in `./coverage/lcov-report/index.html` file.
 
 * `npm run dev` - to run the application in 'developer' mode,
 instantly refreshing when changes are made in the editor.
+
+
+## Some test might not pass due to... refactoring that was done

@@ -31,13 +31,16 @@ const Register = (props) => {
   return(
     <div className="loginForm">
       {!areEqual && <p> Passwords must match! </p>}
-      Username: <input name='username' value={values.username} onChange={handleChange} />
-      Password: <input
+      <label htmlFor='username'>Username: </label>
+      <input name='username' value={values.username} onChange={handleChange} />
+      <label htmlFor='password'>Password: </label>
+      <input
         name='password'
         type='password'
         value={values.password}
         onChange={handleChange} />
-      Confirm Password: <input
+      <label htmlFor='confirmPassword'>Confirm Password:</label>
+      <input
         name='confirmPassword'
         type='password'
         value={values.confirmPassword}

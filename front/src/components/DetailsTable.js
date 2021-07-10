@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 export const DetailsTable = ({ linkData, removeLink }) => {
 
   return (
-    <table>
+    <table id='linksDetails'>
       <thead>
         <tr>
           <th>Destination URL</th>
           <th>Shortened</th>
           <th>Total Visits</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody >

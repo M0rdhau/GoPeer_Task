@@ -1,0 +1,102 @@
+:root{
+  --error: rgb(185, 0, 0);
+  --notif: rgb(0, 119, 0);
+  --ivory: #eeede7;
+  --gray: #868b8e;
+  --pewter: #b9b7bd;
+  --scallop: #e7d2cc;
+  background-color: var(--scallop);
+}
+
+body, html, #app, #root, #app>div, .mainBody{
+  height: 100%
+}
+
+
+
+.error, .notification {
+  text-align: center;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+
+.error {
+  color: var(--error);
+  border: solid 5px var(--error);
+}
+
+.notification {
+  color: var(--notif);
+  border: solid 5px var(--notif);
+}
+
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 5px var(--ivory);
+  background-color: gray;
+  max-width: 30%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.loginForm > *{
+  margin-top: 1rem;
+}
+
+.mainBody{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stats{
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 0.5;
+}
+
+#linksDetails {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border: solid 5px var(--ivory);
+}
+
+#linksDetails td, #linksDetails th {
+  border: 1px solid var(--scallop);
+  padding: 8px;
+}
+
+#linksDetails tr:nth-child(even){background-color: var(--gray);}
+
+#linksDetails tr:hover {background-color: var(--gray);}
+
+#linksDetails th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: var(--ivory);
+}
+
+.details{
+  width: 100%;
+}
+
+.sorter{
+  display: flex;
+  flex-direction: column;
+}
+
+.VictoryContainer{
+  min-width: 30vw;
+}
