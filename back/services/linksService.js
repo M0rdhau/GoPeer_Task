@@ -13,10 +13,14 @@ const getLinksByUserToken = async (token) => {
 
   const user = await User.findById(decodedToken.userId)
 
-  const links = await Link
+  let links = await Link
     .find({ user: user.id })
-    .populate('visits')
-
+  links = links.map(link => link.toJSON())
+    .map(link => ({
+      destURL: link.destURL,
+      id: link.id,
+      visits: link.visits.length
+    }))
   return { code: 200, data: links }
 }
 

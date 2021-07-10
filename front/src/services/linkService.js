@@ -9,4 +9,12 @@ const addUrl = async (user, destURL) => {
   return response
 }
 
-export default { addUrl }
+const getAllUrls = async (user) => {
+  const config = {
+    headers: { Authorization: `bearer ${user.token}` }
+  }
+  const response = await axios.get(baseUrl, config)
+  return response
+}
+
+export default { addUrl, getAllUrls }

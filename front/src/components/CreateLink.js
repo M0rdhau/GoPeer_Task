@@ -1,15 +1,14 @@
 import React from 'react'
 import { useForm } from '../hooks/useForm'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import linkService from '../services/linkService'
 import Togglable from './Togglable'
 import { setNotification } from '../reducers/notificationReducer'
 
 export const Createlink = () => {
   const [values, handleChange, reset] = useForm({ destURL: '' })
-  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-
+  const user = useSelector(state => state.user)
 
   const handleURLAdd = async () => {
     try{
