@@ -2,12 +2,12 @@ const Link = require('../models/link')
 const Visit = require('../models/visit')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const dateRandInMillis = require('../utils/dateRand')
 
 const TOKEN_ERROR = { error: true, code: 401, message: 'token missing or invalid' }
 
 //dummy data variables
 const POPULATE_VISITS_NUM = 100
-const MILLIS_IN_A_DAY = 86400000
 const MAX_OFFSET = 400
 
 const getLinksByUserToken = async (token) => {
@@ -47,8 +47,7 @@ const populate = async (request) => {
   const savedUrlIds = savedUrls.map(url => url._id)
 
   for(let i = 0; i < POPULATE_VISITS_NUM; i++){
-    const offset = Math.floor(Math.random()*MAX_OFFSET)*MILLIS_IN_A_DAY
-    const offsetDate = Date.now() - offset
+    const offsetDate = dateRandInMillis(MAX_OFFSET)
     const randLinkIdx = Math.floor(Math.random()*savedUrlIds.length)
     const newVisit = new Visit({ date: offsetDate })
     const savedVisit = await newVisit.save()

@@ -16,20 +16,21 @@ beforeEach(async () => {
   }
 })
 
-describe('getting users from the database', () => {
-  test('GET to users endpoint returns full list of users', async () => {
-    const response = await api
-      .get('/api/users')
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-    const users = helper.initialUsers
-    expect(response.body).toHaveLength(users.length)
+//TODO: will readd this test if user administration will be a thing
+// describe('getting users from the database', () => {
+//   test('GET to users endpoint returns full list of users', async () => {
+//     const response = await api
+//       .get('/api/users')
+//       .expect(200)
+//       .expect('Content-Type', /application\/json/)
+//     const users = helper.initialUsers
+//     expect(response.body).toHaveLength(users.length)
 
-    const userNamesInDB = response.body.map(u => u.username)
-    const initialUserNames = users.map(u => u.username)
-    expect(userNamesInDB).toEqual(initialUserNames)
-  })
-})
+//     const userNamesInDB = response.body.map(u => u.username)
+//     const initialUserNames = users.map(u => u.username)
+//     expect(userNamesInDB).toEqual(initialUserNames)
+//   })
+// })
 
 describe('adding a user to the database', () => {
   test('POSTing a user adds it to the database', async () => {

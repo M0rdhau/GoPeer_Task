@@ -7,10 +7,17 @@ const Link = require('../models/link')
 const Visit = require('../models/visit')
 const helper = require('./test_helper')
 const bcrypt = require('bcrypt')
+const dateRandInMillis = require('../utils/dateRand')
 
 let currentToken
 
 const DATE_APPROX = 1000000
+
+//variables for testing populate endpoint
+const MAX_OFFSET = 400
+let startDate
+let endDate
+let linkData
 
 beforeEach(async () => {
   await Link.deleteMany({})
@@ -68,6 +75,44 @@ describe('User actions', () => {
       })
     currentToken = response.body.token
   })
+  test('Database can be populated with dummy data', async () => {
+    await api
+      .get('/links/populate')
+      .set('Authorization', `bearer ${currentToken}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+  describe('User can retrieve visit data', () => {
+    beforeEach( async () => {
+      startDate = dateRandInMillis(MAX_OFFSET)
+      endDate = dateRandInMillis(MAX_OFFSET)
+      if(startDate > endDate){
+        let temp = startDate
+        startDate = endDate
+        endDate = temp
+      }
+      startDate = new Date(startDate)
+      endDate = new Date(endDate)
+      linkData = await api
+        .get('/links/populate')
+        .set('Authorization', `bearer ${currentToken}`)
+      linkData = linkData.body
+    })
+    test('Visits per day', async () => {
+      const linkID = linkData[0].id
+      let visitData = await api
+        .get(`/links/stats/${linkID}/${startDate.toISOString()}/${endDate.toISOString()}/day`)
+        .set('Authorization', `bearer ${currentToken}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+      visitData = visitData.body
+      if(visitData.length > 0){
+        visitData = visitData.map(v => Date.parse(v._id))
+        expect(Date.parse(startDate)).toBeLessThanOrEqual(Math.min(...visitData))
+        expect(Date.parse(endDate)).toBeGreaterThanOrEqual(Math.max(...visitData))
+      }
+    })
+  })
   test('A new URL can be added by the user', async () => {
     const newURL = { destURL: 'https://somesite.com' }
     await api
@@ -124,7 +169,7 @@ describe('User actions', () => {
       .find(l => l.destURL === linkToVisit.destURL)
       .visits
 
-    expect(updatedLinkVisits).toHaveLength(initialLinkVisits.length + 1)
+    expect(updatedLinkVisits).toEqual(initialLinkVisits + 1)
   })
   test('A link can be deleted', async () => {
     const linksBefore = await helper.linksInDB()
