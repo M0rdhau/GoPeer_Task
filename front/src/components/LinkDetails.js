@@ -31,7 +31,7 @@ export const LinkDetails = ({ linkID }) => {
   useEffect(() => {
     if(linkData.length > 0){
       setBarValues({
-        data: linkData.map(link => ({ x:link._id, y:link.count })),
+        data: linkData.map(link => ({ x:link._id, y:link.count, z: new Date(link._id) })),
         domain: { x: [0, linkData.length], y: [0, Math.max(...linkData.map(l => l.count))] }
       })
     }
@@ -62,6 +62,7 @@ export const LinkDetails = ({ linkID }) => {
           <VictoryBar
             data={barValues.data}
             domain={barValues.domain}
+            sortKey='z'
           />
         </VictoryChart>
       }
