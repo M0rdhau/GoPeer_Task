@@ -14,12 +14,7 @@ To launch the project, as always:
 after signing up and logging in, pressing `populate` will, you guessed it, populate the database
 
 ---
-### Some considerations:
-* Even though data is being visualized, I couldn't in time figure out how to sort the graph according to time (now I do, but it's kinda late)
-* Frontend has no tests - but it had a lot of potentail to have been tested with different technologies including Cypress
-* CSS could have been prettier
+### 13 JUL
 
----
-### 12 JUL update
-
-Created branch `post-submission` to address issues from last paragraph
+Every problem is addressed in its own github issue, and resolved ones are live in the `post-submission` branch.\
+As the challenge deadline was on 10th, it doesn't make sense to change the main branch.
