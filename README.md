@@ -14,12 +14,10 @@ To launch the project, as always:
 after signing up and logging in, pressing `populate` will, you guessed it, populate the database
 
 ---
-### Some considerations:
-* Even though data is being visualized, I couldn't in time figure out how to sort the graph according to time (now I do, but it's kinda late)
-* Frontend has no tests - but it had a lot of potentail to have been tested with different technologies including Cypress
-* CSS could have been prettier
+## What's different from main branch?
 
----
-### 12 JUL update
-
-Created branch `post-submission` to address issues from last paragraph
+* better code organization on the frontend
+* backend tests (which are all passing) with better coverage
+* (coming soon) tests on frontend
+* (coming soon) live demo
+* (coming soon) CD/CI

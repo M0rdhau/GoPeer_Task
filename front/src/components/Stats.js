@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { DetailsTable } from './DetailsTable'
+import { DetailsTable } from './presentational/DetailsTable'
 import { LinkDetails } from './LinkDetails'
 import { OverviewData } from './OverviewData'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
@@ -13,7 +13,7 @@ export const Stats = () => {
   const match = useRouteMatch('/details/:id')
 
   const linkID = (match && linkData)
-    ? linkData.find(link => link.id === match.params.id).id
+    ? match.params.id
     : null
 
   const dispatch = useDispatch()
