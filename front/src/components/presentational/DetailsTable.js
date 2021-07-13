@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export const DetailsTable = ({ linkData, removeLink }) => {
 
@@ -31,4 +32,9 @@ export const DetailsTable = ({ linkData, removeLink }) => {
       </tbody>
     </table>
   )
+}
+
+DetailsTable.PropTypes = {
+  linkData: PropTypes.array.isRequired,
+  removeLink: PropTypes.func.isRequired
 }

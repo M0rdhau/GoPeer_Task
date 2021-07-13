@@ -89,7 +89,6 @@ export const UserScreen = () => {
             user={user}
             values={addUrlValues}
             handleChange={handleUrlChange}
-            reset={resetUrl}
             handleURLAdd = {handleURLAdd}
             handleLogout = {handleLogout}
             populateDB = {populateDB}

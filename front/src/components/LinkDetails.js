@@ -5,6 +5,7 @@ import linkService from '../services/linkService'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
+import PropTypes from 'prop-types'
 
 export const LinkDetails = ({ linkID }) => {
   const [linkData, setLinkData] = useState([])
@@ -68,4 +69,8 @@ export const LinkDetails = ({ linkID }) => {
       }
     </>
   )
+}
+
+LinkDetails.PropTypes = {
+  linkID: PropTypes.string.isRequired
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import Togglable from '../Togglable'
+import PropTypes from 'prop-types'
 
 export const Createlink = ({ values, handleChange, handleURLAdd }) => {
   return (
@@ -11,4 +12,10 @@ export const Createlink = ({ values, handleChange, handleURLAdd }) => {
       </div>
     </Togglable>
   )
+}
+
+Createlink.PropTypes = {
+  values: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleURLAdd: PropTypes.func.isRequired
 }

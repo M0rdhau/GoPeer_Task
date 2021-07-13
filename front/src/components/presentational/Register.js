@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Register =
 ({ toggle, areEqual, values, handleChange, onConfirmPasswordChange, handleRegister }) => {
@@ -25,6 +26,15 @@ const Register =
     </div>
   )
 
+}
+
+Register.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  areEqual: PropTypes.bool.isRequired,
+  values: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  onConfirmPasswordChange: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired
 }
 
 export default Register

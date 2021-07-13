@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Login = ({ toggle, values, handleChange, handleLogin }) => {
   return(
@@ -15,6 +16,13 @@ const Login = ({ toggle, values, handleChange, handleLogin }) => {
       <button onClick={toggle}>Or Register</button>
     </div>
   )
+}
+
+Login.PropTypes = {
+  toggle: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired
 }
 
 export default Login

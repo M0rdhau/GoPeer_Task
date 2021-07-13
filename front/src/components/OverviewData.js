@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { VictoryPie, VictoryTheme } from 'victory'
+import PropTypes from 'prop-types'
 
 export const OverviewData = ({ linkData }) => {
   const [focusedLink, setFocusedLink] = useState('')
@@ -79,4 +80,8 @@ export const OverviewData = ({ linkData }) => {
       </div>
     </div>
   )
+}
+
+OverviewData.PropTypes = {
+  links: PropTypes.array.isRequired
 }
