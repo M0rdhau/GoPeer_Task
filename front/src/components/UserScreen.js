@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, logOut } from '../reducers/userReducer'
 import { setNotification } from '../reducers/notificationReducer'
-import { populateLinks } from '../reducers/linkDataReducer'
-import { createLink } from '../reducers/linkDataReducer'
+import { populateLinks, createLink, getGeneral } from '../reducers/linkDataReducer'
 import registerService from '../services/register'
 import Login from './presentational/Login'
 import { UserActions } from './presentational/UserActions'
@@ -20,6 +19,12 @@ export const UserScreen = () => {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.user)
+
+  useEffect(() => {
+    if(user){
+      dispatch(getGeneral())
+    }
+  }, [dispatch, user])
 
   const toggle = () => {
     setRegistering(!registering)
@@ -92,14 +97,14 @@ export const UserScreen = () => {
           : <Login
             toggle={toggle}
             values={loginValues}
-            onChange={handleLoginChange}
+            handleChange={handleLoginChange}
             handleLogin={handleLogin}
           />
         : <Register
           toggle={toggle}
           areEqual={areEqual}
           values={registerValues}
-          onChange={handleRegisterChange}
+          handleChange={handleRegisterChange}
           handleRegister={handleRegister}
           onConfirmPasswordChange={onConfirmPasswordChange}
         />

@@ -51,11 +51,15 @@ export const deleteLink = (id) => {
 
 export const getGeneral = () => {
   return async dispatch => {
-    const response = await linkService.getAllUrls()
-    dispatch({
-      type: 'INIT',
-      data: response.data
-    })
+    try{
+      const response = await linkService.getAllUrls()
+      dispatch({
+        type: 'INIT',
+        data: response.data
+      })
+    }catch(e){
+      dispatch(setNotification(e.response.headers.error, true))
+    }
   }
 }
 
