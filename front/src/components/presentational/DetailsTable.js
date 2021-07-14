@@ -34,7 +34,7 @@ export const DetailsTable = ({ linkData, removeLink }) => {
   )
 }
 
-DetailsTable.PropTypes = {
+DetailsTable.propTypes = {
   linkData: PropTypes.array.isRequired,
   removeLink: PropTypes.func.isRequired
 }

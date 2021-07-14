@@ -82,6 +82,6 @@ export const OverviewData = ({ linkData }) => {
   )
 }
 
-OverviewData.PropTypes = {
+OverviewData.propTypes = {
   links: PropTypes.array.isRequired
 }

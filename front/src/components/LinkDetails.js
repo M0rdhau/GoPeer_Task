@@ -71,6 +71,6 @@ export const LinkDetails = ({ linkID }) => {
   )
 }
 
-LinkDetails.PropTypes = {
+LinkDetails.propTypes = {
   linkID: PropTypes.string.isRequired
 }

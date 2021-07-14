@@ -18,7 +18,7 @@ const Login = ({ toggle, values, handleChange, handleLogin }) => {
   )
 }
 
-Login.PropTypes = {
+Login.propTypes = {
   toggle: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,

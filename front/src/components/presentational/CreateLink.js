@@ -14,7 +14,7 @@ export const Createlink = ({ values, handleChange, handleURLAdd }) => {
   )
 }
 
-Createlink.PropTypes = {
+Createlink.propTypes = {
   values: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleURLAdd: PropTypes.func.isRequired

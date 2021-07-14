@@ -12,7 +12,7 @@ const Notification = ({ notification }) => {
   )
 }
 
-Notification.PropTypes = {
+Notification.propTypes = {
   notification: PropTypes.object.isRequired
 }
 
