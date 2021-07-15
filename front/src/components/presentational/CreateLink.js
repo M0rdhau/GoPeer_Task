@@ -7,7 +7,7 @@ export const Createlink = ({ values, handleChange, handleURLAdd }) => {
     <Togglable buttonLabel='Add a URL'>
       <div className='urlCreator' >
         Destination URL:
-        <input name='destURL' value={values.destURL} onChange={handleChange} />
+        <input className='addUrl' name='destURL' value={values.destURL} onChange={handleChange} />
         <button onClick={handleURLAdd}>Add</button>
       </div>
     </Togglable>

@@ -8,6 +8,7 @@ import registerService from '../services/register'
 import Login from './presentational/Login'
 import { UserActions } from './presentational/UserActions'
 import Register from './presentational/Register'
+import { Createlink } from './CreateLink'
 
 export const UserScreen = () => {
   const [registering, setRegistering] = useState(false)
@@ -87,12 +88,15 @@ export const UserScreen = () => {
         ? (user !== null)
           ? <UserActions
             user={user}
-            values={addUrlValues}
-            handleChange={handleUrlChange}
-            handleURLAdd = {handleURLAdd}
             handleLogout = {handleLogout}
             populateDB = {populateDB}
-          />
+          >
+            <Createlink
+              values={addUrlValues}
+              handleChange={handleUrlChange}
+              handleURLAdd={handleURLAdd}
+            />
+          </UserActions>
           : <Login
             toggle={toggle}
             values={loginValues}
